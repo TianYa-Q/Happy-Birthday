@@ -187,6 +187,16 @@
             document.querySelector('audio').play();
         }
 
+        // 兼容IOS自动播放
+        document.addEventListener('DOMContentLoaded', function () {
+            function audioAutoPlay() {
+                var audio = document.querySelector('audio');
+                audio.play();
+                document.removeEventListener('touchstart', audioAutoPlay);
+            }
+            document.addEventListener('touchstart', audioAutoPlay);
+        });
+
         // 自动滚动歌词
         function scrollLyrics() {
             var lyrics = document.querySelector(".lyrics");
